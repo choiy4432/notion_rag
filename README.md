@@ -1,7 +1,7 @@
 # notion_rag
 RAG implementation using Notion source
 
-#Usage
+# Usage
 1. First time / update data
 
   ```$ python main.py -reload```
