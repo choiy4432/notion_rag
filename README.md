@@ -59,7 +59,7 @@ Notion Pages & Databases
 |---|---|
 | 언어 | Python 3.10+ |
 | Notion 수집 | `notion-client` 3.x |
-| 임베딩 | Gemini `gemini-embedding-001` (3072차원) |
+| 임베딩 | Gemini `gemini-embedding-2` (3072차원) |
 | LLM | Gemini `gemini-2.5-flash` |
 | 벡터 DB | ChromaDB (로컬 영구 저장) |
 | API 클라이언트 | `google-genai` |
