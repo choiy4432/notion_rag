@@ -2,7 +2,9 @@
 RAG implementation using Notion source
 
 #Usage
-1. First time / update data \n
+1. First time / update data
+
 ```$ python main.py -reload```
-2. Use chatbot \n
+3. Use chatbot
+
 ```$ pyton main.py```
