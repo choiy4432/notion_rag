@@ -1,4 +1,5 @@
 from google import genai
+from google.genai import types
 from embedder import embed_text
 from db import VectorStore
 import config
@@ -35,8 +36,10 @@ class RAGSearcher:
         context = "\n\n---\n\n".join([f"[{d['page_title']}] (유사도: {d['similarity']})\n{d['text']}" for d in docs])
 
         prompt = f"""당신은 나의 Notion 개인 비서입니다.
-아래 [Context]를 바탕으로 질문에 답하세요.
-모르는 내용은 지어내지 말고 "정보가 부족하여 알 수 없습니다"라고 답하세요.
+[답변 가이드라인]
+1. 먼저 제공된 [Context]에 질문에 대한 명확한 답이 있는지 확인하세요.
+2. [Context]에 관련 내용이 있다면, 해당 정보를 바탕으로 답변하세요.
+3. 만약 [Context]에 관련 내용이 없거나 부족하다면, "현재 Notion에서 해당 자료를 찾을 수는 없지만, 일반적인 정보(또는 인터넷 정보)를 바탕으로 답변드리겠습니다."라는 멘트를 서두에 반드시 포함하고, 당신이 알고 있는 지식을 활용해 성실하게 답변하세요.
 
 [Context]
 {context}
@@ -44,5 +47,8 @@ class RAGSearcher:
 [Question]
 {question}"""
 
-        response = client.models.generate_content(model="gemini-3.1-flash-lite", contents=prompt)
+        # search_config = types.GenerateContentConfig(tools=[types.Tool(google_search=types.GoogleSearch())])
+        response = client.models.generate_content(
+            model="gemini-3.1-flash-lite", contents=prompt
+        )  # add config=search_config for search tool
         return response.text
