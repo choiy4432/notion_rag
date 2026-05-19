@@ -34,7 +34,7 @@ class RAGSearcher:
             return "관련 문서를 찾지 못했습니다."
 
         context = "\n\n---\n\n".join([f"[{d['page_title']}] (유사도: {d['similarity']})\n{d['text']}" for d in docs])
-
+        # edit prompt to include guidelines
         prompt = f"""당신은 나의 Notion 개인 비서입니다.
 [답변 가이드라인]
 1. 먼저 제공된 [Context]에 질문에 대한 명확한 답이 있는지 확인하세요.
